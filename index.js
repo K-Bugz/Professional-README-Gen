@@ -1,9 +1,8 @@
 // Imported packages from NPM
 const fs = require("fs"); // Very popular fs is a filewriting System documentation https://www.npmjs.com/package/file-system
-// const util = require("util");
-const inquirer = require("inquirer");
+const inquirer = require("inquirer"); // const util = require("util");
 // Local imports from myself
-const generateReadme = require("./utils/generateMarkdown")
+const { generateMarkdown, renderLicenseBadge } = require('./utils/generateMarkdown');
 
 // An array of questions that the const inquirer will use, 
 // I chose to use defaults when possible & validation for required
@@ -14,8 +13,20 @@ const questions = [
         name: "username",
         default: "K-Bugz",
         validate: function (answer) {
-            if (answer.length <= 1) {
+            if (answer) {
                 return console.log("Please give your GitHub repo name. ");
+            }
+            return true;
+        }
+    },
+    { // Email
+        type: "input",
+        message: "What is your email?",
+        name: "email",
+        default: "kbugusky@gmail.com",
+        validate: function (answer) {
+            if (answer) {
+                return console.log("Please give your email contact. ");
             }
             return true;
         }
@@ -25,7 +36,7 @@ const questions = [
         message: "What is the name of your GitHub repo?",
         name: "repo",
         validate: function (answer) {
-            if (answer.length <= 1) {
+            if (answer) {
                 return console.log("Please give your GitHub repo.");
             }
             return true;
@@ -36,7 +47,7 @@ const questions = [
         message: "What is the project title?",
         name: "title",
         validate: function (answer) {
-            if (answer.length <= 1) {
+            if (answer) {
                 return console.log("Please give a project title.");
             }
             return true;
@@ -63,12 +74,17 @@ const questions = [
         message: "Provide any tests written if applicable.",
         name: "tests"
     },
+    {  // Contributors 
+        type: "input",
+        name: "contribution",
+        message: "Please enter contributors to the project.",
+    },
     { // List of licences
         type: "list",
         message: "Choose a license for your project.",
-        choices: ["MIT", "BSD", "GNU", "Eclipse", "IBM", "Mozilla"],
-        default: "MIT",
-        name: 'license'
+        choices: ["MIT", "GNU", "Eclipse", "IBM", "Mozilla"],
+        default: "",
+        name: "license"
     }
 ];
 
@@ -82,9 +98,14 @@ function writeToFile(fileName, data) {
     });
 }
 
-
-// TODO: Create a function to initialize app
-function init() { }
+// A function to initialize app
+function init() {
+    promptUser = () => { // Atmepting to use my knowledge from the modules in this project. 
+        return inquirer.prompt(questions).then((answers) => writeToFile("./dist/README.md", generateMarkdown(answers)))
+            .then(() => console.log('Successfully wrote to README.md'))
+            .catch((err) => console.error(err));
+    }
+};
 
 // Function call to initialize app
 init();
