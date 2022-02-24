@@ -13,7 +13,7 @@ const questions = [
         name: "username",
         default: "K-Bugz",
         validate: function (answer) {
-            if (answer) {
+            if (!answer) {
                 return console.log("Please give your GitHub repo name. ");
             }
             return true;
@@ -25,19 +25,8 @@ const questions = [
         name: "email",
         default: "kbugusky@gmail.com",
         validate: function (answer) {
-            if (answer) {
+            if (!answer) {
                 return console.log("Please give your email contact. ");
-            }
-            return true;
-        }
-    },
-    { // Repo name
-        type: "input",
-        message: "What is the name of your GitHub repo?",
-        name: "repo",
-        validate: function (answer) {
-            if (answer) {
-                return console.log("Please give your GitHub repo.");
             }
             return true;
         }
@@ -47,7 +36,7 @@ const questions = [
         message: "What is the project title?",
         name: "title",
         validate: function (answer) {
-            if (answer) {
+            if (!answer) {
                 return console.log("Please give a project title.");
             }
             return true;
@@ -100,11 +89,9 @@ function writeToFile(fileName, data) {
 
 // A function to initialize app
 function init() {
-    promptUser = () => { // Atmepting to use my knowledge from the modules in this project. 
-        return inquirer.prompt(questions).then((answers) => writeToFile("./dist/README.md", generateMarkdown(answers)))
-            .then(() => console.log('Successfully wrote to README.md'))
-            .catch((err) => console.error(err));
-    }
+    return inquirer.prompt(questions).then((answers) => writeToFile("./dist/README.md", generateMarkdown(answers)))
+        .then(() => console.log('Successfully wrote to README.md'))
+        .catch((err) => console.error(err));
 };
 
 // Function call to initialize app
