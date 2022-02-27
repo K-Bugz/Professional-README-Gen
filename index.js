@@ -3,7 +3,7 @@ const fs = require("fs"); // Very popular fs is a filewriting System documentati
 const inquirer = require("inquirer"); // const util = require("util");
 // Local imports from myself
 const generateMarkdown = require('./utils/generateMarkdown');
-// const { generateMarkdown, renderLicenseBadge } = require('./utils/generateMarkdown'); // deconstructing the page
+// const { generateMarkdown, renderLicenseBadge } = require('./utils/generateMarkdown'); // deconstructing the page (tree shaking)
 
 // An arrow function that  const inquirer will use, data argument going out!!!!
 const questions = (data) => {
@@ -79,19 +79,19 @@ const questions = (data) => {
     ]);
 }
 
-// Function that uses the fs module to writeFile method. 
-function writeToFile(fileName, data) {
-    fs.writeFile(fileName, data, err => {
-        if (err) {
-            return console.log(err);
-        }
-        console.log("README.md has been generated")
-    });
-}
+// // Function that uses the fs module to writeFile method. 
+// function writeToFile(fileName, data) {
+//     fs.writeFile(fileName, data, err => {
+//         if (err) {
+//             return console.log(err);
+//         }
+//         console.log("README.md has been generated")
+//     });
+// }
 
 // Function call to initialize app
 questions()
-        .then(writeToFile = data => {
+        .then(data => { 
         const readMe = generateMarkdown(data)
         fs.writeFile("./dist/README.md", readMe, err => {
             if (err)

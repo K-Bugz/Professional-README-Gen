@@ -1,8 +1,8 @@
 
-[![Generic badge](https://img.shields.io/badge/license-IBM-blue.svg)](https://opensource.org/licenses/IPL-1.0)
-# A thank you to Jon for helping me with my THOTS
+[![Generic badge](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+# das
 ## Description
-Helped out with badges.... and arguments!
+da
 ## Table of Contents
 * [Installation](#installation)
 * [Usage](#usage)
@@ -11,17 +11,16 @@ Helped out with badges.... and arguments!
 * [License](#license)
 * [Questions](#questions)
 ## Installation
-get your d on
+da
 ## Tests
-testsssss
+da
 ## Usage
 Helps you make quick proffesional README.md files for projects
 ## Contributing
-Jon and Bugz
+dassdfsafdsafda Jon and John
 ## License
-This app is licensed under the IBM license.
+This app is licensed under the MIT license.
 ## Questions
 * GitHub: [K-Bugz](https://github.com/K-Bugz)
 * Email: 
 [kbugusky@gmail.com](mailto:kbugusky@gmail.com)
-
